@@ -25,7 +25,7 @@ def app(environ, start_response):
             #os.system("killall -9 aplay")
         d = parse_qs(request_body)  # turns the qs to a dict
         return 'Alarm ON'
-    else:  # GET
+    else:  # GET ALARM STATE
         d = parse_qs(environ['QUERY_STRING'])  # turns the qs to a dict
         option = ''.join('%s: %s' % (alarm) for alarm in d.iteritems())
         if option == "alarm: ['yes']":
@@ -37,7 +37,8 @@ def app(environ, start_response):
             option = 'nao'
             print("nao")
             #os.system("killall -9 aplay")
-        return option
+        data_set = {"state": "on"}
+        return json.dumps(data_set)
 
         # return 'From GET: %s' % ''.join('%s: %s' % (k, v) for k, v in d.iteritems())
 httpd = make_server('', 1337, app)
