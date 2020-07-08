@@ -4,6 +4,7 @@ import subprocess
 import urlparse
 import os
 import json
+import constant
 
 
 def app(environ, start_response):
@@ -17,6 +18,7 @@ def app(environ, start_response):
         print(action_json["action"])
         if action_json["action"] == "on":
             print("sim")
+            print(constant.ALARM_TRIGGER)
             #os.system("aplay /storage/siren.wav")
         else:
             print("nao")
